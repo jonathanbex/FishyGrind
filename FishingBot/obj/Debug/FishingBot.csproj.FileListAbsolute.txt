@@ -1,0 +1,14 @@
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\FishingBot.exe.config
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\FishingBot.exe
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\FishingBot.pdb
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\NHotkey.dll
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\NHotkey.Wpf.dll
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\NLog.dll
+C:\Users\jonat\source\repos\FishingBot\FishingBot\bin\Debug\NLog.xml
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.GrindFish.resources
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.Properties.Resources.resources
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.csproj.GenerateResource.cache
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.csproj.CoreCompileInputs.cache
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.csproj.CopyComplete
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.exe
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.pdb
