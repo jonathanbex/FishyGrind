@@ -4,16 +4,13 @@ using NHotkey;
 using NHotkey.Wpf;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -38,7 +35,8 @@ namespace FishingBot.Methods
 
     private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
     private const int MOUSEEVENTF_RIGHTUP = 0x10;
-
+    Point cursor = new Point();
+    Rect windowRec = new Rect();
     private string bind;
     private int timer;
     private bool pause = false;
@@ -48,6 +46,11 @@ namespace FishingBot.Methods
     IntPtr h;
     ColorHelpers colorHelpers;
     private DateTime EndTime;
+    private DateTime LastAppendedLure;
+    byte KEYBDEVENTF_SHIFTVIRTUAL = 0x10;
+    byte KEYBDEVENTF_SHIFTSCANCODE = 0x2A;
+    int KEYBDEVENTF_KEYDOWN = 0;
+    int KEYBDEVENTF_KEYUP = 2;
     public Fisher() {
       this.colorHelpers = new ColorHelpers();
       var config = new NLog.Config.LoggingConfiguration();
@@ -131,19 +134,27 @@ namespace FishingBot.Methods
       {
         if (DateTime.Now > EndTime) LogOut();
         mainWindow.Invoke(new MethodInvoker(() => mainWindow.ChangeStatusText("Analyzing", false)));
-        Point cursor = new Point();
+
         GetCursorPos(ref cursor);
+        if (LastAppendedLure == null) {
+          AppendLure();
+          LastAppendedLure = DateTime.Now;
+        }
+        if (DateTime.Now > LastAppendedLure.AddMinutes(10)) {
+          AppendLure();
+          LastAppendedLure = DateTime.Now;
+        }
+
         SendKeys.SendWait(rodBind);
-        Thread.Sleep(200);
+        Thread.Sleep(1000);
 
 
         var c = GetPicture(cursor);
         //var hej = CheckColors(c);
-        var inPosition = FindPos(c);
-        if (!inPosition)
-        {
-          inPosition = GetInPos(cursor, c);
-        }
+
+
+       var inPosition = GetInPos(cursor, c);
+        
         var FishHooked = false;
         int triesLoop = 0;
         while (!FishHooked && inPosition)
@@ -160,10 +171,7 @@ namespace FishingBot.Methods
             //send left button down
             uint X = (uint)Cursor.Position.X;
             uint Y = (uint)Cursor.Position.Y;
-             byte KEYBDEVENTF_SHIFTVIRTUAL = 0x10;
-           byte KEYBDEVENTF_SHIFTSCANCODE = 0x2A;
-          int KEYBDEVENTF_KEYDOWN = 0;
-            int KEYBDEVENTF_KEYUP = 2;
+   
             Thread.Sleep(50);
             keybd_event(KEYBDEVENTF_SHIFTVIRTUAL, KEYBDEVENTF_SHIFTSCANCODE, KEYBDEVENTF_KEYDOWN, 0);
             Thread.Sleep(50);
@@ -183,6 +191,25 @@ namespace FishingBot.Methods
       }
 
 
+    }
+    private void AppendLure() {
+      GetCursorPos(ref cursor);
+      uint X = (uint)Cursor.Position.X;
+      uint Y = (uint)Cursor.Position.Y;
+      SendKeys.SendWait(bind);
+      Thread.Sleep(6000);
+
+      GetWindowRect(h, ref windowRec);
+      var middleY = (windowRec.Bottom - windowRec.Top) / 2;
+      var middleX = (windowRec.Right - windowRec.Left) / 2;
+      cursor.X = middleX;
+      cursor.Y = middleY;
+      SetCursorPos(cursor.X, cursor.Y);
+
+
+      mouse_event(MOUSEEVENTF_RIGHTDOWN, X, Y, 0, 0);
+      Thread.Sleep(50);
+      mouse_event(MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
     }
     private void LogOut() {
   
@@ -218,10 +245,11 @@ namespace FishingBot.Methods
           GetCursorPos(ref cursor);
           Thread.Sleep(100);
           c = GetPicture(cursor);
-   
-          if (FindPos(c))
+          var posOfFoat = FindPos(c);
+          if (posOfFoat != null)
           {
-            h += 20;
+            h = (h -100) + posOfFoat.Y;
+            x = (x - 100) +  posOfFoat.X;
             SetCursorPos(x, h);
             return true;
           }
@@ -240,7 +268,7 @@ namespace FishingBot.Methods
         for (int y = 0; y < screen.Height; y++)
         {
           var color = screen.GetPixel(x, y);
-          if (colorHelpers.AnotherColorHelper(color)) {
+          if (colorHelpers.ColorHelper(color)) {
             logger.Info("Catching madafaka with " + ColorTranslator.ToHtml(color));
               return true;
           }
@@ -250,40 +278,25 @@ namespace FishingBot.Methods
       return false;
     }
 
-    private bool CheckColors(Bitmap screen)
+    private CursorPos FindPos(Bitmap screen)
     {
+      var cursor = new CursorPos { X = 0, Y = 0 };
       for (int x = 0; x < screen.Width; x++)
       {
         for (int y = 0; y < screen.Height; y++)
         {
           var color = screen.GetPixel(x, y);
-          if (colorHelpers.colorHelper(ColorTranslator.ToHtml(color)))
-          {
-            logger.Info("Catching madafaka with " + ColorTranslator.ToHtml(color));
-            return true;
-          }
-
-        }
-      }
-      return false;
-    }
-
-    private bool FindPos(Bitmap screen)
-    {
-      for (int x = 0; x < screen.Width; x++)
-      {
-        for (int y = 0; y < screen.Height; y++)
-        {
-          var color = screen.GetPixel(x, y);
-          if (colorHelpers.FindFishingFloat(ColorTranslator.ToHtml(color)))
+          if (colorHelpers.FindFishingFloat(color))
           {
             logger.Info("Found Float " + ColorTranslator.ToHtml(color));
-            return true;
+            cursor.X = x;
+            cursor.Y = y;
+            return cursor;
           }
 
         }
       }
-      return false;
+      return null;
     }
 
 

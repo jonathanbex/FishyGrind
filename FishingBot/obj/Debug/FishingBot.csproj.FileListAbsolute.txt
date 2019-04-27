@@ -12,3 +12,4 @@ C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.csproj.Co
 C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.csproj.CopyComplete
 C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.exe
 C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.pdb
+C:\Users\jonat\source\repos\FishingBot\FishingBot\obj\Debug\FishingBot.csprojAssemblyReference.cache

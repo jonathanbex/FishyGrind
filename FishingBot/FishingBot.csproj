@@ -70,6 +70,7 @@
     <Compile Include="Helpers\ColorHelpers.cs" />
     <Compile Include="Helpers\UzbekistanWhisperHelper.cs" />
     <Compile Include="Methods\Fisher.cs" />
+    <Compile Include="Models\CursorPos.cs" />
     <Compile Include="Models\Rect.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
