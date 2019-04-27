@@ -22,10 +22,10 @@ namespace FishingBot
     private void Start_Click(object sender, EventArgs e)
     {
       var fisher = new Fisher();
-      int timeSeconds;
+      int timeMinutes;
       try
       {
-        timeSeconds = int.Parse(Timer.Text);
+        timeMinutes = int.Parse(Timer.Text);
       }
       catch {
         throw new Exception("Wrong supplied value for timer");
@@ -33,7 +33,7 @@ namespace FishingBot
       var bindKey = bind.Text;
       var rod = FishingRodBind.Text;
       if (string.IsNullOrEmpty(bindKey) || string.IsNullOrEmpty(rod)) throw new Exception("Have to input bind keys");
-      fisher.Run(bindKey, rod, timeSeconds,this);
+      fisher.Run(bindKey, rod, timeMinutes,this);
     }
 
     public void ChangeStatusText(string text,bool operatoren) {

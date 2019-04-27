@@ -47,7 +47,7 @@ namespace FishingBot.Methods
     GrindFish mainWindow = null;
     IntPtr h;
     ColorHelpers colorHelpers;
-
+    private DateTime EndTime;
     public Fisher() {
       this.colorHelpers = new ColorHelpers();
       var config = new NLog.Config.LoggingConfiguration();
@@ -71,12 +71,13 @@ namespace FishingBot.Methods
       bool isadmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
       process.WaitForInputIdle();
       h = process.MainWindowHandle;
-      HotkeyManager.Current.AddOrReplace("Pause", Key.P, ModifierKeys.Control, hotkeyPressed);
+      HotkeyManager.Current.AddOrReplace("Pause", Key.P, ModifierKeys.Control, HotKeyPressed);
       SetForegroundWindow(h);
       this.bind = bind;
       this.timer = timer;
       this.mainWindow = main;
       this.rodBind = rodBind;
+      this.EndTime = DateTime.Now.AddMinutes(timer);
       //5 seconds to get cursor into position
       mainWindow.Invoke(new MethodInvoker(() => mainWindow.ChangeStatusText("Starting in", false)));
       Thread.Sleep(1000);
@@ -91,7 +92,7 @@ namespace FishingBot.Methods
       mainWindow.Invoke(new MethodInvoker(() => mainWindow.ChangeStatusText("1", false)));
       Thread.Sleep(1000);
 
-      runBot();
+      RunBot();
 
 
     }
@@ -113,21 +114,22 @@ namespace FishingBot.Methods
     }
 
 
-    private void hotkeyPressed(object sender, HotkeyEventArgs e)
+    private void HotKeyPressed(object sender, HotkeyEventArgs e)
     {
       pause = !pause;
       if (!pause)
       {
-        runBot();
+        RunBot();
       }
       else mainWindow.Invoke(new MethodInvoker(() => mainWindow.ChangeStatusText("Paused", false)));
       e.Handled = true;
     }
 
-    private void runBot()
+    private void RunBot()
     {
       while (!pause)
       {
+        if (DateTime.Now > EndTime) LogOut();
         mainWindow.Invoke(new MethodInvoker(() => mainWindow.ChangeStatusText("Analyzing", false)));
         Point cursor = new Point();
         GetCursorPos(ref cursor);
@@ -181,6 +183,17 @@ namespace FishingBot.Methods
       }
 
 
+    }
+    private void LogOut() {
+  
+      SendKeys.SendWait("~");
+      SendKeys.SendWait("/");
+      SendKeys.SendWait("C");
+      SendKeys.SendWait("A");
+      SendKeys.SendWait("M");
+      SendKeys.SendWait("P");
+      SendKeys.SendWait("~");
+      pause = true;
     }
     public bool GetInPos(Point cursor, Bitmap c)
     {
