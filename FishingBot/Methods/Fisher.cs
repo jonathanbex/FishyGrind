@@ -185,7 +185,7 @@ namespace FishingBot.Methods
           }
           Thread.Sleep(200);
           triesLoop++;
-          if (triesLoop == 100) FishHooked = true;
+          if (triesLoop == 125) FishHooked = true;
         }
         Thread.Sleep(2000);
       }

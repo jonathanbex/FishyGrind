@@ -34,23 +34,32 @@ namespace FishingBot.Helpers
     //earlier tries
     public bool FindFishingFloat(Color color)
     {
-      if (FindFishingFloatHelper(color, "#8bb0da")) return true;
-     // if (FindFishingFloatHelper(color, "#1a4cad")) return true;
-     // if (FindFishingFloatHelper(color, "#1b489e")) return true;
-      if (FindFishingFloatHelper(color, "#236abc")) return true;
-      //if (FindFishingFloatHelper(color, "#16327c")) return true;
-      //if (FindFishingFloatHelper(color, "#1c419a")) return true;
-      //if (FindFishingFloatHelper(color, "#2772e0")) return true;
-      if (FindFishingFloatHelper(color, "#1f4fb7")) return true;
-      //if (FindFishingFloatHelper(color, "#19388c")) return true;
-      //if (FindFishingFloatHelper(color, "#1b3a8e")) return true;
-      if (FindFishingFloatHelper(color, "#2550a5")) return true;
-      if (FindFishingFloatHelper(color, "#8169a9")) return true;
-      if (FindFishingFloatHelper(color, "#625f96")) return true;
-     
-      //if (FindFishingFloatHelper(color, "#3a81d4")) return true;
-      //if (FindFishingFloatHelper(color, "#7b7db4")) return true;
-      //if (FindFishingFloatHelper(color, "#8a97cb")) return true;
+      // if (FindFishingFloatHelper(color, "#8bb0da")) return true;
+      //// if (FindFishingFloatHelper(color, "#1a4cad")) return true;
+      //// if (FindFishingFloatHelper(color, "#1b489e")) return true;
+      // if (FindFishingFloatHelper(color, "#236abc")) return true;
+      // //if (FindFishingFloatHelper(color, "#16327c")) return true;
+      // //if (FindFishingFloatHelper(color, "#1c419a")) return true;
+      // //if (FindFishingFloatHelper(color, "#2772e0")) return true;
+      // if (FindFishingFloatHelper(color, "#1f4fb7")) return true;
+      // //if (FindFishingFloatHelper(color, "#19388c")) return true;
+      // //if (FindFishingFloatHelper(color, "#1b3a8e")) return true;
+      // if (FindFishingFloatHelper(color, "#2550a5")) return true;
+      // if (FindFishingFloatHelper(color, "#8169a9")) return true;
+      // if (FindFishingFloatHelper(color, "#625f96")) return true;
+
+      // //if (FindFishingFloatHelper(color, "#3a81d4")) return true;
+      // //if (FindFishingFloatHelper(color, "#7b7db4")) return true;
+      // //if (FindFishingFloatHelper(color, "#8a97cb")) return true;
+
+      // //blue checks
+      // if (FindFishingFloatHelper(color, "#2550a5")) return true;
+      // if (FindFishingFloatHelper(color, "#8169a9")) return true;
+      // if (FindFishingFloatHelper(color, "#625f96")) return true;
+      // if (FindFishingFloatHelper(color, "#1f4fb7")) return true;
+      // if (FindFishingFloatHelper(color, "#236abc")) return true;
+      // if (FindFishingFloatHelper(color, "#8bb0da")) return true;1
+      if (FindFishingFloatHelper(color, "#d5b067")) return true;
       return false;
     }
     public bool FindFishingFloatHelper(Color color,string hex)
