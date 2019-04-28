@@ -32,8 +32,12 @@ namespace FishingBot
       }
       var bindKey = bind.Text;
       var rod = FishingRodBind.Text;
+
       if (string.IsNullOrEmpty(bindKey) || string.IsNullOrEmpty(rod)) throw new Exception("Have to input bind keys");
-      fisher.Run(bindKey, rod, timeMinutes,this);
+
+      if (!string.IsNullOrEmpty(Timer.Text)) TimerEnd(timeMinutes);
+ fisher.Run(bindKey, rod, timeMinutes,this);
+   
     }
 
     public void ChangeStatusText(string text,bool operatoren) {
@@ -47,6 +51,9 @@ namespace FishingBot
       Application.DoEvents();
       return;
     }
-
+    private void TimerEnd(int timeMinutes) {
+      DateTime dateEnd = DateTime.Now.AddMinutes(timeMinutes);
+      TimerLeft.Text = "Logging out at " + dateEnd.ToString();
+    }
   }
 }
