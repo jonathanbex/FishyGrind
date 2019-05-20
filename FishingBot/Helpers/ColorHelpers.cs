@@ -59,7 +59,16 @@ namespace FishingBot.Helpers
       // if (FindFishingFloatHelper(color, "#1f4fb7")) return true;
       // if (FindFishingFloatHelper(color, "#236abc")) return true;
       // if (FindFishingFloatHelper(color, "#8bb0da")) return true;1
-      if (FindFishingFloatHelper(color, "#d5b067")) return true;
+
+      TimeSpan start = new TimeSpan(20, 0, 0);
+      TimeSpan end = new TimeSpan(06, 0, 0);
+      if (TimeBetween(DateTime.Now, start, end))
+      {
+        if (FindFishingFloatHelper(color, "#857fb4")) return true;
+        if (FindFishingFloatHelper(color, "#4d3f76")) return true;
+      }
+      else if (FindFishingFloatHelper(color, "#d5b067")) return true;
+
       return false;
     }
     public bool FindFishingFloatHelper(Color color,string hex)
@@ -77,6 +86,16 @@ namespace FishingBot.Helpers
         return true;
       }
       return false;
+    }
+    bool TimeBetween(DateTime datetime, TimeSpan start, TimeSpan end)
+    {
+      // convert datetime to a TimeSpan
+      TimeSpan now = datetime.TimeOfDay;
+      // see if start comes before end
+      if (start < end)
+        return start <= now && now <= end;
+      // start is after end, so do the inverse comparison
+      return !(end < now && now < start);
     }
   }
 }
