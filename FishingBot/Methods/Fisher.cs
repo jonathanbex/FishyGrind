@@ -4,6 +4,7 @@ using NHotkey;
 using NHotkey.Wpf;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -51,6 +52,7 @@ namespace FishingBot.Methods
     byte KEYBDEVENTF_SHIFTSCANCODE = 0x2A;
     int KEYBDEVENTF_KEYDOWN = 0;
     int KEYBDEVENTF_KEYUP = 2;
+    Bitmap startPos = null;
     public Fisher() {
       this.colorHelpers = new ColorHelpers();
       var config = new NLog.Config.LoggingConfiguration();
@@ -106,8 +108,8 @@ namespace FishingBot.Methods
       Bitmap screenPixel = new Bitmap(200, 200, PixelFormat.Format32bppArgb);
       using (Graphics gdest = Graphics.FromImage(screenPixel))
       {
-        location.X -= 100;
-        location.Y -= 100;
+        location.X -= 75;
+        location.Y -= 25;
         gdest.CopyFromScreen(location, new Point(0, 0), size);
         mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreen(screenPixel)));
         return screenPixel;
@@ -156,13 +158,16 @@ namespace FishingBot.Methods
        var inPosition = GetInPos(cursor, c);
         
         var FishHooked = false;
+        GetCursorPos(ref cursor);
+
+         startPos = get100x100(GetPicture(cursor));
         int triesLoop = 0;
         while (!FishHooked && inPosition)
         {
           if (pause) break;
           GetCursorPos(ref cursor);
           c = GetPicture(cursor);
-          var fishwasHooked = CatchFish(c);
+          var fishwasHooked = CatchFish(c,startPos);
           //need to get owning form to display what pixel we see now.
           //if color matches
           if (fishwasHooked)
@@ -248,9 +253,9 @@ namespace FishingBot.Methods
           var posOfFoat = FindPos(c);
           if (posOfFoat != null)
           {
-            h = (h -100) + posOfFoat.Y;
-            x = (x - 100) +  posOfFoat.X;
-            SetCursorPos(x, h);
+            //h = (h) + posOfFoat.Y;
+            //x = (x) + posOfFoat.X;
+            //SetCursorPos(x, h);
             return true;
           }
           var check = h + 10;
@@ -261,20 +266,36 @@ namespace FishingBot.Methods
       }
       return false;
     }
-    private bool CatchFish(Bitmap screen)
+    private bool CatchFish(Bitmap screen,Bitmap startPos)
     {
-      for (int x = 0; x < screen.Width; x++)
+      var screensmall = get100x100(screen);
+      mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebug1(startPos)));
+      mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebug2(screensmall)));
+      var screenSmallHash = GetHash(screensmall);
+      var startposHash = GetHash(startPos);
+      float equalElements = Compare(screenSmallHash, startposHash);
+      mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebugText2(equalElements)));
+     
+      if (equalElements > 1.105)
       {
-        for (int y = 0; y < screen.Height; y++)
-        {
-          var color = screen.GetPixel(x, y);
-          if (colorHelpers.ColorHelper(color)) {
-            logger.Info("Catching madafaka with " + ColorTranslator.ToHtml(color));
-              return true;
-          }
 
-        }
+        return true;
       }
+      //for (int x = 0; x < screen.Width; x++)
+      //{
+      //  for (int y = 0; y < screen.Height; y++)
+      //  {
+      //    var color = screen.GetPixel(x, y);
+      //    if (colorHelpers.ColorHelper(color))
+      //    {
+      //      logger.Info("Catching madafaka with " + ColorTranslator.ToHtml(color));
+      //      mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebug1(startPos)));
+      //      mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebug2(screensmall)));
+      //      return true;
+      //    }
+
+      //  }
+      //}
       return false;
     }
 
@@ -299,6 +320,30 @@ namespace FishingBot.Methods
       return null;
     }
 
+    public Bitmap get100x100(Bitmap src) {
+      Bitmap screenPixel = new Bitmap(50, 100, PixelFormat.Format32bppArgb);
+      using (Graphics gdest = Graphics.FromImage(screenPixel))
+      {
+        gdest.DrawImage(src, new Rectangle(0, 0,50,100), new Rectangle(50, 25, 50, 100), GraphicsUnit.Pixel);
+        return screenPixel;
+      }
+    }
+    public int GetHash(Bitmap bmpSource)
+    {
+      int rgbaTotal = 0;
+      for (int j = 0; j < bmpSource.Height; j++)
+      {
+        for (int i = 0; i < bmpSource.Width; i++)
+        {
+          var pixel = bmpSource.GetPixel(i, j);
+          rgbaTotal += pixel.R + pixel.G + pixel.B;
+        }
+      }
+      return rgbaTotal;
+    }
+    public float Compare(int hash1, int hash2) {
+      return (float) hash1 / hash2;
+    }
 
 
 

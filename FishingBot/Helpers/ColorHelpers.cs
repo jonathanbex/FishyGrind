@@ -60,8 +60,8 @@ namespace FishingBot.Helpers
       // if (FindFishingFloatHelper(color, "#236abc")) return true;
       // if (FindFishingFloatHelper(color, "#8bb0da")) return true;1
 
-      if(FindFishingFloatHelper(color, "#d5b067")) return true;
-
+     // if(FindFishingFloatHelper(color, "#d5b067")) return true;
+      if (FindFishingFloatHelper(color, "#dabd6e")) return true;
       return false;
     }
     public bool FindFishingFloatHelper(Color color,string hex)
@@ -70,7 +70,7 @@ namespace FishingBot.Helpers
       if (ColorsAreClose(color, checkBlue)) return true;
       return false;
     }
-    bool ColorsAreClose(Color a, Color z, int threshold = 30)
+    bool ColorsAreClose(Color a, Color z, int threshold = 15)
     {
       var diff =  Math.Abs(a.R - z.R) + Math.Abs(a.G - z.G) + Math.Abs(a.B - z.B);
       if (diff <= threshold) {

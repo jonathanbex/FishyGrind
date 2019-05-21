@@ -42,7 +42,12 @@
       this.FishingRodBind = new System.Windows.Forms.TextBox();
       this.label5 = new System.Windows.Forms.Label();
       this.TimerLeft = new System.Windows.Forms.TextBox();
+      this.pictureBox2 = new System.Windows.Forms.PictureBox();
+      this.pictureBox3 = new System.Windows.Forms.PictureBox();
+      this.textBox1 = new System.Windows.Forms.TextBox();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
       this.SuspendLayout();
       // 
       // Start
@@ -151,11 +156,40 @@
       this.TimerLeft.TabIndex = 11;
       this.TimerLeft.Text = "Logout Time";
       // 
+      // pictureBox2
+      // 
+      this.pictureBox2.Location = new System.Drawing.Point(12, 261);
+      this.pictureBox2.Name = "pictureBox2";
+      this.pictureBox2.Size = new System.Drawing.Size(191, 145);
+      this.pictureBox2.TabIndex = 12;
+      this.pictureBox2.TabStop = false;
+      // 
+      // pictureBox3
+      // 
+      this.pictureBox3.Location = new System.Drawing.Point(224, 261);
+      this.pictureBox3.Name = "pictureBox3";
+      this.pictureBox3.Size = new System.Drawing.Size(191, 145);
+      this.pictureBox3.TabIndex = 13;
+      this.pictureBox3.TabStop = false;
+      // 
+      // textBox1
+      // 
+      this.textBox1.Location = new System.Drawing.Point(110, 412);
+      this.textBox1.Multiline = true;
+      this.textBox1.Name = "textBox1";
+      this.textBox1.ReadOnly = true;
+      this.textBox1.Size = new System.Drawing.Size(191, 20);
+      this.textBox1.TabIndex = 14;
+      this.textBox1.Text = "Loading...";
+      // 
       // GrindFish
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(445, 239);
+      this.ClientSize = new System.Drawing.Size(665, 453);
+      this.Controls.Add(this.textBox1);
+      this.Controls.Add(this.pictureBox3);
+      this.Controls.Add(this.pictureBox2);
       this.Controls.Add(this.TimerLeft);
       this.Controls.Add(this.FishingRodBind);
       this.Controls.Add(this.label5);
@@ -171,6 +205,8 @@
       this.Name = "GrindFish";
       this.Text = "GrindFish";
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -191,6 +227,9 @@
     private System.Windows.Forms.TextBox FishingRodBind;
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.TextBox TimerLeft;
+    private System.Windows.Forms.PictureBox pictureBox2;
+    private System.Windows.Forms.PictureBox pictureBox3;
+    private System.Windows.Forms.TextBox textBox1;
   }
 }
 

@@ -51,6 +51,24 @@ namespace FishingBot
       Application.DoEvents();
       return;
     }
+    public void ShowMiniScreenDebug1(Bitmap picture)
+    {
+      pictureBox2.Image = picture;
+      Application.DoEvents();
+      return;
+    }
+    public void ShowMiniScreenDebug2(Bitmap picture)
+    {
+      pictureBox3.Image = picture;
+      Application.DoEvents();
+      return;
+    }
+    public void ShowMiniScreenDebugText2(float equal)
+    {
+      textBox1.Text = equal + " elements";
+      Application.DoEvents();
+      return;
+    }
     private void TimerEnd(int timeMinutes) {
       DateTime dateEnd = DateTime.Now.AddMinutes(timeMinutes);
       TimerLeft.Text = "Logging out at " + dateEnd.ToString();
