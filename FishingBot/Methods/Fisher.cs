@@ -40,6 +40,7 @@ namespace FishingBot.Methods
     Rect windowRec = new Rect();
     private string bind;
     private int timer;
+    private int lureTimer;
     private bool pause = false;
     private string rodBind;
     Logger logger;
@@ -66,10 +67,11 @@ namespace FishingBot.Methods
     }
 
 
-    public void Run(string bind,string rodBind, int timer, GrindFish main)
+    public void Run(string bind,string rodBind, int timer,int lureTimer, GrindFish main)
     {
       //focus process
       var process = Process.GetProcessesByName("WOW").FirstOrDefault();
+      if (process == null) process = Process.GetProcessesByName("WowB").FirstOrDefault();
       if (process == null) return;
       WindowsIdentity user = WindowsIdentity.GetCurrent();
       WindowsPrincipal principal = new WindowsPrincipal(user);
@@ -83,6 +85,7 @@ namespace FishingBot.Methods
       this.mainWindow = main;
       this.rodBind = rodBind;
       this.EndTime = DateTime.Now.AddMinutes(timer);
+      this.lureTimer = lureTimer;
       //5 seconds to get cursor into position
       mainWindow.Invoke(new MethodInvoker(() => mainWindow.ChangeStatusText("Starting in", false)));
       Thread.Sleep(1000);
@@ -142,7 +145,7 @@ namespace FishingBot.Methods
           AppendLure();
           LastAppendedLure = DateTime.Now;
         }
-        if (DateTime.Now > LastAppendedLure.AddMinutes(10)) {
+        if (DateTime.Now > LastAppendedLure.AddMinutes(lureTimer)) {
           AppendLure();
           LastAppendedLure = DateTime.Now;
         }
@@ -188,9 +191,9 @@ namespace FishingBot.Methods
             Thread.Sleep(500);
             FishHooked = true;
           }
-          Thread.Sleep(200);
+          Thread.Sleep(100);
           triesLoop++;
-          if (triesLoop == 125) FishHooked = true;
+          if (triesLoop == 250) FishHooked = true;
         }
         Thread.Sleep(2000);
       }
@@ -275,10 +278,10 @@ namespace FishingBot.Methods
       var startposHash = GetHash(startPos);
       float equalElements = Compare(screenSmallHash, startposHash);
       mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebugText2(equalElements)));
-     
-      if (equalElements > 1.105)
+      logger.Info("Light Diff " + equalElements);
+      if (equalElements > 1.03)
       {
-
+        logger.Info("returning true");
         return true;
       }
       //for (int x = 0; x < screen.Width; x++)

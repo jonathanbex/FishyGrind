@@ -45,6 +45,8 @@
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.pictureBox3 = new System.Windows.Forms.PictureBox();
       this.textBox1 = new System.Windows.Forms.TextBox();
+      this.lureTime = new System.Windows.Forms.TextBox();
+      this.label6 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -54,7 +56,7 @@
       // 
       this.Start.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.Start.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-      this.Start.Location = new System.Drawing.Point(12, 129);
+      this.Start.Location = new System.Drawing.Point(12, 171);
       this.Start.Name = "Start";
       this.Start.Size = new System.Drawing.Size(168, 71);
       this.Start.TabIndex = 0;
@@ -116,7 +118,7 @@
       // label4
       // 
       this.label4.AutoSize = true;
-      this.label4.Location = new System.Drawing.Point(12, 203);
+      this.label4.Location = new System.Drawing.Point(12, 245);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(82, 13);
       this.label4.TabIndex = 7;
@@ -182,11 +184,29 @@
       this.textBox1.TabIndex = 14;
       this.textBox1.Text = "Loading...";
       // 
+      // lureTime
+      // 
+      this.lureTime.Location = new System.Drawing.Point(12, 145);
+      this.lureTime.Name = "lureTime";
+      this.lureTime.Size = new System.Drawing.Size(168, 20);
+      this.lureTime.TabIndex = 16;
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(9, 129);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(98, 13);
+      this.label6.TabIndex = 15;
+      this.label6.Text = "Lure timer (minutes)";
+      // 
       // GrindFish
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(665, 453);
+      this.Controls.Add(this.lureTime);
+      this.Controls.Add(this.label6);
       this.Controls.Add(this.textBox1);
       this.Controls.Add(this.pictureBox3);
       this.Controls.Add(this.pictureBox2);
@@ -230,6 +250,8 @@
     private System.Windows.Forms.PictureBox pictureBox2;
     private System.Windows.Forms.PictureBox pictureBox3;
     private System.Windows.Forms.TextBox textBox1;
+    private System.Windows.Forms.TextBox lureTime;
+    private System.Windows.Forms.Label label6;
   }
 }
 

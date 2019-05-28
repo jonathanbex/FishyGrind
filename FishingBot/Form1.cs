@@ -23,6 +23,7 @@ namespace FishingBot
     {
       var fisher = new Fisher();
       int timeMinutes;
+      int timerLure;
       try
       {
         timeMinutes = int.Parse(Timer.Text);
@@ -30,13 +31,21 @@ namespace FishingBot
       catch {
         throw new Exception("Wrong supplied value for timer");
       }
+      try
+      {
+        timerLure = int.Parse(lureTime.Text);
+      }
+      catch
+      {
+        throw new Exception("Wrong supplied value for lure timer");
+      }
       var bindKey = bind.Text;
       var rod = FishingRodBind.Text;
 
       if (string.IsNullOrEmpty(bindKey) || string.IsNullOrEmpty(rod)) throw new Exception("Have to input bind keys");
 
       if (!string.IsNullOrEmpty(Timer.Text)) TimerEnd(timeMinutes);
- fisher.Run(bindKey, rod, timeMinutes,this);
+ fisher.Run(bindKey, rod, timeMinutes, timerLure, this);
    
     }
 
