@@ -38,7 +38,6 @@
       this.label3 = new System.Windows.Forms.Label();
       this.StatusStuff = new System.Windows.Forms.TextBox();
       this.label4 = new System.Windows.Forms.Label();
-      this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.FishingRodBind = new System.Windows.Forms.TextBox();
       this.label5 = new System.Windows.Forms.Label();
       this.TimerLeft = new System.Windows.Forms.TextBox();
@@ -47,7 +46,8 @@
       this.textBox1 = new System.Windows.Forms.TextBox();
       this.lureTime = new System.Windows.Forms.TextBox();
       this.label6 = new System.Windows.Forms.Label();
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+      this.sensitivity = new System.Windows.Forms.TextBox();
+      this.label7 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
       this.SuspendLayout();
@@ -124,14 +124,6 @@
       this.label4.TabIndex = 7;
       this.label4.Text = "Pause = Ctrl + p";
       // 
-      // pictureBox1
-      // 
-      this.pictureBox1.Location = new System.Drawing.Point(242, 82);
-      this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(191, 145);
-      this.pictureBox1.TabIndex = 8;
-      this.pictureBox1.TabStop = false;
-      // 
       // FishingRodBind
       // 
       this.FishingRodBind.Location = new System.Drawing.Point(12, 103);
@@ -176,7 +168,7 @@
       // 
       // textBox1
       // 
-      this.textBox1.Location = new System.Drawing.Point(110, 412);
+      this.textBox1.Location = new System.Drawing.Point(12, 412);
       this.textBox1.Multiline = true;
       this.textBox1.Name = "textBox1";
       this.textBox1.ReadOnly = true;
@@ -200,11 +192,29 @@
       this.label6.TabIndex = 15;
       this.label6.Text = "Lure timer (minutes)";
       // 
+      // sensitivity
+      // 
+      this.sensitivity.Location = new System.Drawing.Point(242, 103);
+      this.sensitivity.Name = "sensitivity";
+      this.sensitivity.Size = new System.Drawing.Size(168, 20);
+      this.sensitivity.TabIndex = 18;
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Location = new System.Drawing.Point(239, 87);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(123, 13);
+      this.label7.TabIndex = 17;
+      this.label7.Text = "Sensitivy (1.03 standard)";
+      // 
       // GrindFish
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(665, 453);
+      this.ClientSize = new System.Drawing.Size(443, 452);
+      this.Controls.Add(this.sensitivity);
+      this.Controls.Add(this.label7);
       this.Controls.Add(this.lureTime);
       this.Controls.Add(this.label6);
       this.Controls.Add(this.textBox1);
@@ -213,7 +223,6 @@
       this.Controls.Add(this.TimerLeft);
       this.Controls.Add(this.FishingRodBind);
       this.Controls.Add(this.label5);
-      this.Controls.Add(this.pictureBox1);
       this.Controls.Add(this.label4);
       this.Controls.Add(this.StatusStuff);
       this.Controls.Add(this.label3);
@@ -224,7 +233,6 @@
       this.Controls.Add(this.Start);
       this.Name = "GrindFish";
       this.Text = "GrindFish";
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
       this.ResumeLayout(false);
@@ -243,7 +251,6 @@
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.TextBox StatusStuff;
     private System.Windows.Forms.Label label4;
-    private System.Windows.Forms.PictureBox pictureBox1;
     private System.Windows.Forms.TextBox FishingRodBind;
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.TextBox TimerLeft;
@@ -252,6 +259,8 @@
     private System.Windows.Forms.TextBox textBox1;
     private System.Windows.Forms.TextBox lureTime;
     private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.TextBox sensitivity;
+    private System.Windows.Forms.Label label7;
   }
 }
 

@@ -42,6 +42,7 @@ namespace FishingBot.Methods
     private string rodBind;
     private DateTime EndTime;
     private DateTime LastAppendedLure;
+    private float sensitivity;
     byte KEYBDEVENTF_SHIFTVIRTUAL = 0x10;
     byte KEYBDEVENTF_SHIFTSCANCODE = 0x2A;
     int KEYBDEVENTF_KEYDOWN = 0;
@@ -71,7 +72,7 @@ namespace FishingBot.Methods
     }
 
 
-    public void Run(string bind,string rodBind, int timer,int lureTimer, GrindFish main)
+    public void Run(string bind,string rodBind, int timer,int lureTimer,float sensitivity, GrindFish main)
     {
       this.bind = bind;
       this.timer = timer;
@@ -79,6 +80,7 @@ namespace FishingBot.Methods
       this.rodBind = rodBind;
       this.EndTime = DateTime.Now.AddMinutes(timer);
       this.lureTimer = lureTimer;
+      this.sensitivity = sensitivity;
       //focus process
       //vanilla
       var process = Process.GetProcessesByName("WOW").FirstOrDefault();
@@ -237,7 +239,7 @@ namespace FishingBot.Methods
       float equalElements = Compare(screenSmallHash, startposHash);
       mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebugText2(equalElements)));
       logger.Info("Light Diff " + equalElements);
-      if (equalElements > 1.03)
+      if (equalElements > sensitivity)
       {
         logger.Info("returning true");
         return true;
@@ -289,7 +291,6 @@ namespace FishingBot.Methods
         location.X -= 75;
         location.Y -= 25;
         gdest.CopyFromScreen(location, new Point(0, 0), size);
-        mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreen(screenPixel)));
         return screenPixel;
       }
 

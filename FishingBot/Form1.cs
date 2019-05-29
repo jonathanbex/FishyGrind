@@ -24,6 +24,7 @@ namespace FishingBot
       var fisher = new Fisher();
       int timeMinutes;
       int timerLure;
+      float threshold = 1.03F;
       try
       {
         timeMinutes = int.Parse(Timer.Text);
@@ -39,24 +40,30 @@ namespace FishingBot
       {
         throw new Exception("Wrong supplied value for lure timer");
       }
+      if (!string.IsNullOrEmpty(sensitivity.Text)) {
+        try
+        {
+          threshold = float.Parse(sensitivity.Text);
+        }
+        catch
+        {
+          throw new Exception("Wrong supplied value for sensitivity timer");
+        }
+      }
+
       var bindKey = bind.Text;
       var rod = FishingRodBind.Text;
 
       if (string.IsNullOrEmpty(bindKey) || string.IsNullOrEmpty(rod)) throw new Exception("Have to input bind keys");
 
       if (!string.IsNullOrEmpty(Timer.Text)) TimerEnd(timeMinutes);
- fisher.Run(bindKey, rod, timeMinutes, timerLure, this);
+ fisher.Run(bindKey, rod, timeMinutes, timerLure, threshold, this);
    
     }
 
     public void ChangeStatusText(string text,bool operatoren) {
       if (operatoren) StatusStuff.Text += text;
       else StatusStuff.Text = text;
-      Application.DoEvents();
-      return;
-    }
-    public void ShowMiniScreen(Bitmap picture) {
-      pictureBox1.Image = picture;
       Application.DoEvents();
       return;
     }
@@ -74,7 +81,7 @@ namespace FishingBot
     }
     public void ShowMiniScreenDebugText2(float equal)
     {
-      textBox1.Text = equal + " elements";
+      textBox1.Text = equal + " diff";
       Application.DoEvents();
       return;
     }
