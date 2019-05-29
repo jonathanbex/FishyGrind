@@ -223,3 +223,13 @@ project.lock.json
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+/.vs/FishingBot/v15/.suo
+/.vs/FishingBot/v15/Server/sqlite3/storage.ide
+/.vs/FishingBot/v15/Server/sqlite3/storage.ide-shm
+/.vs/FishingBot/v15/Server/sqlite3/storage.ide-wal
+/FishingBot/bin/Debug/FishingBot.exe
+/FishingBot/bin/Debug/FishingBot.pdb
+/FishingBot/obj/Debug/FishingBot.csproj.FileListAbsolute.txt
+/FishingBot/obj/Debug/FishingBot.csproj.GenerateResource.cache
+/FishingBot/obj/Debug/FishingBot.exe
+/FishingBot/obj/Debug/FishingBot.pdb
