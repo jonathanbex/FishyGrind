@@ -214,9 +214,9 @@
       this.nightMode.AutoSize = true;
       this.nightMode.Location = new System.Drawing.Point(242, 129);
       this.nightMode.Name = "nightMode";
-      this.nightMode.Size = new System.Drawing.Size(105, 17);
+      this.nightMode.Size = new System.Drawing.Size(120, 17);
       this.nightMode.TabIndex = 19;
-      this.nightMode.Text = "Night (no splash)";
+      this.nightMode.Text = "Check for no splash";
       this.nightMode.UseVisualStyleBackColor = true;
       // 
       // GrindFish

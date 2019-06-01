@@ -247,7 +247,7 @@ namespace FishingBot.Methods
         logger.Info("returning true");
         return true;
       }
-      if (!nightMode && equalElements > sensitivity)
+      if (equalElements > sensitivity)
       {
         logger.Info("returning true");
         return true;
