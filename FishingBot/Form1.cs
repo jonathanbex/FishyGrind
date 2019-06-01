@@ -25,6 +25,7 @@ namespace FishingBot
       int timeMinutes;
       int timerLure;
       float threshold = 1.03F;
+      bool nightModeCheck = nightMode.Checked;
       try
       {
         timeMinutes = int.Parse(Timer.Text);
@@ -57,7 +58,7 @@ namespace FishingBot
       if (string.IsNullOrEmpty(bindKey) || string.IsNullOrEmpty(rod)) throw new Exception("Have to input bind keys");
 
       if (!string.IsNullOrEmpty(Timer.Text)) TimerEnd(timeMinutes);
- fisher.Run(bindKey, rod, timeMinutes, timerLure, threshold, this);
+ fisher.Run(bindKey, rod, timeMinutes, timerLure, threshold, nightModeCheck, this);
    
     }
 

@@ -48,6 +48,7 @@
       this.label6 = new System.Windows.Forms.Label();
       this.sensitivity = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
+      this.nightMode = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
       this.SuspendLayout();
@@ -208,11 +209,22 @@
       this.label7.TabIndex = 17;
       this.label7.Text = "Sensitivy (1.03 standard)";
       // 
+      // nightMode
+      // 
+      this.nightMode.AutoSize = true;
+      this.nightMode.Location = new System.Drawing.Point(242, 129);
+      this.nightMode.Name = "nightMode";
+      this.nightMode.Size = new System.Drawing.Size(105, 17);
+      this.nightMode.TabIndex = 19;
+      this.nightMode.Text = "Night (no splash)";
+      this.nightMode.UseVisualStyleBackColor = true;
+      // 
       // GrindFish
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(443, 452);
+      this.Controls.Add(this.nightMode);
       this.Controls.Add(this.sensitivity);
       this.Controls.Add(this.label7);
       this.Controls.Add(this.lureTime);
@@ -261,6 +273,7 @@
     private System.Windows.Forms.Label label6;
     private System.Windows.Forms.TextBox sensitivity;
     private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.CheckBox nightMode;
   }
 }
 

@@ -43,6 +43,7 @@ namespace FishingBot.Methods
     private DateTime EndTime;
     private DateTime LastAppendedLure;
     private float sensitivity;
+    private bool nightMode;
     byte KEYBDEVENTF_SHIFTVIRTUAL = 0x10;
     byte KEYBDEVENTF_SHIFTSCANCODE = 0x2A;
     int KEYBDEVENTF_KEYDOWN = 0;
@@ -72,7 +73,7 @@ namespace FishingBot.Methods
     }
 
 
-    public void Run(string bind,string rodBind, int timer,int lureTimer,float sensitivity, GrindFish main)
+    public void Run(string bind,string rodBind, int timer,int lureTimer,float sensitivity,bool nightMode, GrindFish main)
     {
       this.bind = bind;
       this.timer = timer;
@@ -81,6 +82,7 @@ namespace FishingBot.Methods
       this.EndTime = DateTime.Now.AddMinutes(timer);
       this.lureTimer = lureTimer;
       this.sensitivity = sensitivity;
+      this.nightMode = nightMode;
       //focus process
       //vanilla
       var process = Process.GetProcessesByName("WOW").FirstOrDefault();
@@ -239,7 +241,13 @@ namespace FishingBot.Methods
       float equalElements = Compare(screenSmallHash, startposHash);
       mainWindow.Invoke(new MethodInvoker(() => mainWindow.ShowMiniScreenDebugText2(equalElements)));
       logger.Info("Light Diff " + equalElements);
-      if (equalElements > sensitivity)
+
+      if(nightMode && equalElements < (1-(sensitivity - 1)))
+      {
+        logger.Info("returning true");
+        return true;
+      }
+      if (!nightMode && equalElements > sensitivity)
       {
         logger.Info("returning true");
         return true;
