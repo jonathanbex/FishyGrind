@@ -1,4 +1,4 @@
-﻿using FishingBot.Helpers;
+using FishingBot.Helpers;
 using FishingBot.Models;
 using NHotkey;
 using NHotkey.Wpf;

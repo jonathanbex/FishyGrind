@@ -1,4 +1,4 @@
-﻿namespace FishingBot
+namespace FishingBot
 {
   partial class GrindFish
   {
